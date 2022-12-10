@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center mt-3">Collections: {{product.title}}</h2>
+      <hr />
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="product-image">
+                {% if item.product_image %}
+                <img
+                  src="{{ product.product_image.url }}"
+                  alt="{{ product.title }}"
+                  class="w-100"
+                />
+                {% endif %}
+              </div>
+              <h4 class="text-primary text-center mt-2">
+                <a
+                  href="{% url 'collectionView' product.slug %}"
+                  class="text-decoration-none"
+                  >{{product.title}}</a
+                >
+              </h4>
+              <div class="row">
+                <div class="col text-muted"><b>Quantity:</b> {{product.quantity}}</div>
+                <div class="col text-end">
+                    <h6 class="text-success">Price: {{product.selling_price|safe|slice:4}}$</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

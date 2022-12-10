@@ -24,3 +24,12 @@ def collectionView(request, slug):
     else:
         messages.warning(request, "No such category found")
         return redirect ('collections')
+    
+def productView(request, slug):
+    product = Product.objects.get(slug=slug)
+    category_name = Category.objects.filter(product=product).first()
+    context = {
+       'product': product,
+        'category': category_name
+    }
+    return render(request, 'category/productView.html', context)

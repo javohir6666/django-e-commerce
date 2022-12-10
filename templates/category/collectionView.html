@@ -1,5 +1,18 @@
 {% extends 'layouts/base.html' %} {% block content %}
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item" aria-current="page">
+        <a href="{% url 'collections' %}">Collections</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+        <a href="{% url 'collectionView' category.slug %}">{{category.title}}</a>
+      </li>
+    </ol>
+  </nav>
+</div>
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <h2 class="text-center mt-3">Collections: {{category.title}}</h2>
@@ -20,15 +33,17 @@
               </div>
               <h4 class="text-primary text-center mt-2">
                 <a
-                  href="{% url 'collectionView' item.slug %}"
+                  href="{% url 'productView' category.slug item.slug %}"
                   class="text-decoration-none"
                   >{{item.title}}</a
                 >
               </h4>
               <div class="row">
-                <div class="col text-muted"><b>Quantity:</b> {{item.quantity}}</div>
+                <div class="col text-muted">
+                    <a class="btn btn-sm btn-primary">Quantity: {{item.quantity}}</a>
+                </div>
                 <div class="col text-end">
-                    <h6 class="text-success">Price: {{item.selling_price|safe|slice:4}}$</h6>
+                    <a class="btn btn-sm btn-success">Price: {{item.selling_price|stringformat:'d'}}$</a>
                 </div>
               </div>
             </div>
